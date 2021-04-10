@@ -46,14 +46,23 @@ const ChatFeed = (props) => {
         });
     }
 
-    if (!chat) return 'Loading Chatroom ...';
+    var loadMessages = ["You can wait for someone to add you", "When you create a chatroom, you are the owner of it", "You can kick users out of the chatroom if you are an owner :) .", "You can add someone to your chatroom without needing that user to verify.", "If this takes too long, you can create your own chats"]
+
+    if (!chat) return (
+        <div className="chat-feed">
+            <div className="chat-title-container">
+                <div className="chat-title">Create a chatroom or wait for someone to add you</div>
+                <div className="chat-subtitle">{loadMessages[Math.floor(Math.random() * loadMessages.length)]}</div>
+            </div>
+        </div>
+    );
 
     return (
         <div className="chat-feed">
             <div className="chat-title-container">
                 <div className="chat-title">{chat?.title}</div>
                 <div className="chat-subtitle">
-                    {chat.people.map((person) => ` ${person.person.username}`)}
+                    {chat.people.map((person) => ` ${person.person.username},`)}
                 </div>
             </div>
             {renderMessages()}
